@@ -5,7 +5,7 @@ function ListCart(props){
     return (
         <div className="cart">
           <h1 >  Name: {props.name} </h1>
-          <p > Description: {props.descripcion}</p>
+          <p > Description: {props.description}</p>
           <button onClick={handleClick}>Delete</button>
         </div>
     )

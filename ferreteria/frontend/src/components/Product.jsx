@@ -6,10 +6,10 @@ function Product() {
     const [products , setNewProducts] = useState(null)
     const [formProduct, setFormProduct] = useState({
           name: "",
-          descripcion: "",
+          description: "",
           imagen: "",
           stock: false,
-          categoria: ""
+          category: ""
           })
 
        useEffect(() => {
@@ -37,10 +37,10 @@ function Product() {
         url:"/products/",
         data:{
             name: formProduct.name,
-            descripcion: formProduct.descripcion,
+            description: formProduct.description,
             imagen: formProduct.imagen,
             stock: formProduct.stock,
-            categoria: formProduct.categoria,
+            category: formProduct.category,
         }
         })
         .then((response) => {
@@ -53,7 +53,7 @@ function Product() {
           descrition: "",
           imagen: "",
           stock: false,
-          categoria: ""}))
+          category: ""}))
 
         event.preventDefault()
         }
@@ -89,17 +89,17 @@ function Product() {
 
             <form className="create-product">
                 <input onChange={handleChange} text={formProduct.name} name="name" placeholder="Name" value={formProduct.name} />
-                <input onChange={handleChange} text={formProduct.categoria} name="categoria" placeholder="Categoria" value={formProduct.categoria} />
-                <textarea onChange={handleChange} name="descripcion" placeholder="This is a description..." value={formProduct.descripcion} />
+                <input onChange={handleChange} text={formProduct.category} name="category" placeholder="category" value={formProduct.category} />
+                <textarea onChange={handleChange} name="description" placeholder="This is a description..." value={formProduct.description} />
                 <button onClick={createProduct}>Create Product</button>
             </form>
                 { products && products.map(product => <ListProduct
                 key={product.id}
                 id={product.id}
                 name={product.name}
-                descripcion={product.descripcion}
+                description={product.description}
                 imagen={product.imagen} 
-                categoria = {product.categoria}
+                category = {product.category}
                 deletion ={DeleteNote}
                 cart = {AddCart}
                 />

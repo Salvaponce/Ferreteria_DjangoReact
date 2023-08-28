@@ -1,29 +1,27 @@
 from django.db import models
 
 
-class Producto(models.Model):
+class Product(models.Model):
     created = models.DateField(auto_now_add=True)
     name = models.CharField(max_length=60, blank=False, default="")
     imagen = models.CharField(max_length=150, blank=True)
     stock = models.BooleanField(default=False)
-    descripcion = models.TextField()
-    categoria = models.CharField(max_length=50, default="Otras")
+    description = models.TextField()
+    category = models.CharField(max_length=50, default="Otras")
+    price = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:
         ordering = ["created"]
 
 
-class Carrito(models.Model):
+class Cart(models.Model):
     owner = models.ForeignKey(
-        "auth.User", related_name="productos", on_delete=models.CASCADE, blank=True
+        "auth.User", related_name="cart", on_delete=models.CASCADE, blank=True
     )
-    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-    cantidad = models.PositiveIntegerField()
+    products = models.ManyToManyField(Product, through="CartItem")
 
 
-class Notes(models.Model):
-    title = models.CharField(max_length=60)
-    content = models.CharField(max_length=120)
-
-    def __str__(self):
-        return self.title
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField()

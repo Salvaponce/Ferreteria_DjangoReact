@@ -1,4 +1,3 @@
-import Note from "./Notes"
 import Product from "./Product"
 
 function App() {
