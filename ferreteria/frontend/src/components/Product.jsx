@@ -41,7 +41,6 @@ function Product() {
             imagen: formProduct.imagen,
             stock: formProduct.stock,
             categoria: formProduct.categoria,
-
         }
         })
         .then((response) => {
@@ -67,7 +66,17 @@ function Product() {
         .then((response) => {
         getProducts()
         });
-    }  
+    } 
+    
+    function AddCart(id){
+        axios({
+            method: "GET",
+            url: `/products/${id}`,
+        })
+        .then((response) => {
+        getProducts()
+        });
+    }
     
     function handleChange(event) { 
         const {value, name} = event.target
@@ -81,7 +90,6 @@ function Product() {
             <form className="create-product">
                 <input onChange={handleChange} text={formProduct.name} name="name" placeholder="Name" value={formProduct.name} />
                 <input onChange={handleChange} text={formProduct.categoria} name="categoria" placeholder="Categoria" value={formProduct.categoria} />
-                <image onChange={handleChange} name="imagen" placeholder="Imagen" value={formProduct.categoria} />
                 <textarea onChange={handleChange} name="descripcion" placeholder="This is a description..." value={formProduct.descripcion} />
                 <button onClick={createProduct}>Create Product</button>
             </form>
@@ -93,6 +101,7 @@ function Product() {
                 imagen={product.imagen} 
                 categoria = {product.categoria}
                 deletion ={DeleteNote}
+                cart = {AddCart}
                 />
                 )}
       </div>

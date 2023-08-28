@@ -7,7 +7,7 @@ class ProductoSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(required=True, allow_blank=False, max_length=60)
     descripcion = serializers.CharField(style={"base_template": "textarea.html"})
-    imagen = serializers.ImageField()
+    imagen = serializers.CharField(max_length=150, allow_blank=True)
     stock = serializers.BooleanField(default=False)
     categoria = serializers.CharField(max_length=50, default="Otras")
 

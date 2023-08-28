@@ -4,7 +4,7 @@ from django.db import models
 class Producto(models.Model):
     created = models.DateField(auto_now_add=True)
     name = models.CharField(max_length=60, blank=False, default="")
-    imagen = models.ImageField()
+    imagen = models.CharField(max_length=150, blank=True)
     stock = models.BooleanField(default=False)
     descripcion = models.TextField()
     categoria = models.CharField(max_length=50, default="Otras")
@@ -15,7 +15,7 @@ class Producto(models.Model):
 
 class Carrito(models.Model):
     owner = models.ForeignKey(
-        "auth.User", related_name="productos", on_delete=models.CASCADE
+        "auth.User", related_name="productos", on_delete=models.CASCADE, blank=True
     )
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField()
