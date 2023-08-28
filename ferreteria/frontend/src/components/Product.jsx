@@ -83,7 +83,7 @@ function Product() {
                 <input onChange={handleChange} text={formProduct.categoria} name="categoria" placeholder="Categoria" value={formProduct.categoria} />
                 <image onChange={handleChange} name="imagen" placeholder="Imagen" value={formProduct.categoria} />
                 <textarea onChange={handleChange} name="descripcion" placeholder="This is a description..." value={formProduct.descripcion} />
-                <button onClick={createProduct}>Create Post</button>
+                <button onClick={createProduct}>Create Product</button>
             </form>
                 { products && products.map(product => <ListProduct
                 key={product.id}

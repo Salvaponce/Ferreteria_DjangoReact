@@ -3,9 +3,9 @@ function ListProduct(props){
     props.deletion(props.id)
   }
     return (
-        <div className="note">
-          <h1 >  Title: {props.name} </h1>
-          <p > Content: {props.descripcion}</p>
+        <div className="product">
+          <h1 >  Name: {props.name} </h1>
+          <p > Description: {props.descripcion}</p>
           <button onClick={handleClick}>Delete</button>
         </div>
     )
