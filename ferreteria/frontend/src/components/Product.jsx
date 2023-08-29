@@ -9,7 +9,8 @@ function Product() {
           description: "",
           imagen: "",
           stock: false,
-          category: ""
+          category: "",
+          price: 0,
           })
 
        useEffect(() => {
@@ -41,6 +42,7 @@ function Product() {
             imagen: formProduct.imagen,
             stock: formProduct.stock,
             category: formProduct.category,
+            price: formProduct.price,
         }
         })
         .then((response) => {
@@ -53,7 +55,8 @@ function Product() {
           descrition: "",
           imagen: "",
           stock: false,
-          category: ""}))
+          category: "",
+          price: 0}))
 
         event.preventDefault()
         }
@@ -91,6 +94,7 @@ function Product() {
                 <input onChange={handleChange} text={formProduct.name} name="name" placeholder="Name" value={formProduct.name} />
                 <input onChange={handleChange} text={formProduct.category} name="category" placeholder="category" value={formProduct.category} />
                 <textarea onChange={handleChange} name="description" placeholder="This is a description..." value={formProduct.description} />
+                <input onChange={handleChange} text={formProduct.price} name="category" placeholder="category" value={formProduct.category} />
                 <button onClick={createProduct}>Create Product</button>
             </form>
                 { products && products.map(product => <ListProduct
