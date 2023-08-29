@@ -4,14 +4,13 @@ from django.contrib.auth.models import User
 
 
 class ProductSerializer(serializers.ModelSerializer):
-
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(required=True, allow_blank=False, max_length=60)
     description = serializers.CharField(style={"base_template": "textarea.html"})
     imagen = serializers.CharField(max_length=150, allow_blank=True)
     stock = serializers.BooleanField(default=False)
     category = serializers.CharField(max_length=50, default="Otras")
-    price = serializers.IntegerField()
+    price = serializers.FloatField()
 
     def create(self, validated_data):
         return Product.objects.create(**validated_data)

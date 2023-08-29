@@ -61,7 +61,7 @@ function Product() {
         event.preventDefault()
         }
     
-    function DeleteNote(id) {
+    function DeleteProduct(id) {
         axios({
         method: "DELETE",
         url:`/products/${id}/`,
@@ -92,9 +92,9 @@ function Product() {
 
             <form className="create-product">
                 <input onChange={handleChange} text={formProduct.name} name="name" placeholder="Name" value={formProduct.name} />
-                <input onChange={handleChange} text={formProduct.category} name="category" placeholder="category" value={formProduct.category} />
                 <textarea onChange={handleChange} name="description" placeholder="This is a description..." value={formProduct.description} />
-                <input onChange={handleChange} text={formProduct.price} name="category" placeholder="category" value={formProduct.category} />
+                <input onChange={handleChange} text={formProduct.category} name="category" placeholder="category" value={formProduct.category} />
+                <input onChange={handleChange} text={formProduct.price} name="price" placeholder="Price" value={formProduct.price} />
                 <button onClick={createProduct}>Create Product</button>
             </form>
                 { products && products.map(product => <ListProduct
@@ -104,7 +104,8 @@ function Product() {
                 description={product.description}
                 imagen={product.imagen} 
                 category = {product.category}
-                deletion ={DeleteNote}
+                price = {product.price}
+                deletion ={DeleteProduct}
                 cart = {AddCart}
                 />
                 )}

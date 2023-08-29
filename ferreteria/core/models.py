@@ -8,7 +8,7 @@ class Product(models.Model):
     stock = models.BooleanField(default=False)
     description = models.TextField()
     category = models.CharField(max_length=50, default="Otras")
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.FloatField()
 
     class Meta:
         ordering = ["created"]

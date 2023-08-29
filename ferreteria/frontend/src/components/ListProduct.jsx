@@ -6,6 +6,7 @@ function ListProduct(props){
         <div className="product">
           <h1 >  Name: {props.name} </h1>
           <p > Description: {props.description}</p>
+          <p > Price: {props.price}</p>
           <button onClick={handleClick}>Delete</button>
         </div>
     )
