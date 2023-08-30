@@ -4,9 +4,9 @@ from django.db import models
 class Product(models.Model):
     created = models.DateField(auto_now_add=True)
     name = models.CharField(max_length=60, blank=False, default="")
-    imagen = models.CharField(max_length=150, blank=True)
+    imagen = models.ImageField(blank=True, null=True)
     stock = models.BooleanField(default=False)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     category = models.CharField(max_length=50, default="Otras")
     price = models.FloatField()
 

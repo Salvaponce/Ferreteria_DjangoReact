@@ -7,7 +7,7 @@ function Product() {
     const [formProduct, setFormProduct] = useState({
           name: "",
           description: "",
-          imagen: "",
+          image: "",
           stock: false,
           category: "",
           price: 0,
@@ -39,7 +39,7 @@ function Product() {
         data:{
             name: formProduct.name,
             description: formProduct.description,
-            imagen: formProduct.imagen,
+            image: formProduct.image,
             stock: formProduct.stock,
             category: formProduct.category,
             price: formProduct.price,
@@ -53,7 +53,7 @@ function Product() {
     setFormProduct(({
           name: "",
           descrition: "",
-          imagen: "",
+          image: "",
           stock: false,
           category: "",
           price: 0}))
@@ -95,6 +95,7 @@ function Product() {
                 <textarea onChange={handleChange} name="description" placeholder="This is a description..." value={formProduct.description} />
                 <input onChange={handleChange} text={formProduct.category} name="category" placeholder="category" value={formProduct.category} />
                 <input onChange={handleChange} text={formProduct.price} name="price" placeholder="Price" value={formProduct.price} />
+                <input type='file' name='image' placeholder="Image" value={formProduct.image}></input>
                 <button onClick={createProduct}>Create Product</button>
             </form>
                 { products && products.map(product => <ListProduct
@@ -102,7 +103,7 @@ function Product() {
                 id={product.id}
                 name={product.name}
                 description={product.description}
-                imagen={product.imagen} 
+                image={product.image} 
                 category = {product.category}
                 price = {product.price}
                 deletion ={DeleteProduct}
