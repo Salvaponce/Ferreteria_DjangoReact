@@ -4,10 +4,11 @@ from django.contrib.auth.models import User
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    """
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(required=True, allow_blank=False, max_length=60)
     description = serializers.CharField(style={"base_template": "textarea.html"})
-    imagen = serializers.ImageField(required=False)
+    image = serializers.ImageField(required=False, upload_to="product")
     stock = serializers.BooleanField(default=False)
     category = serializers.CharField(max_length=50, default="Otras")
     price = serializers.FloatField()
@@ -18,16 +19,16 @@ class ProductSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         instance.name = validated_data.get("name", instance.name)
         instance.description = validated_data.get("description", instance.description)
-        instance.imagen = validated_data.get("imagen", instance.imagen)
+        instance.image = validated_data.get("image", instance.image)
         instance.stock = validated_data.get("stock", instance.stock)
         instance.category = validated_data.get("category", instance.category)
         instance.price = validated_data.get("price", instance.price)
         instance.save()
-        return instance
+        return instance"""
 
     class Meta:
         model = Product
-        fields = ["id", "name", "description", "imagen", "stock", "category", "price"]
+        fields = "__all__"
 
 
 class UserSerializer(serializers.ModelSerializer):

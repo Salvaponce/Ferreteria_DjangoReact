@@ -5,6 +5,9 @@ function ListProduct(props){
     return (
         <div className="product">
           <h1 >  Name: {props.name} </h1>
+            {props.image?.src && (
+            <img src={ props.image.url } alt={ props.name } />
+            )}
           <p > Description: {props.description}</p>
           <p > Price: {props.price}</p>
           <button onClick={handleClick}>Delete</button>

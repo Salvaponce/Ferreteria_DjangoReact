@@ -7,7 +7,7 @@ function Product() {
     const [formProduct, setFormProduct] = useState({
           name: "",
           description: "",
-          image: "",
+          image: null,
           stock: false,
           category: "",
           price: 0,
@@ -83,9 +83,12 @@ function Product() {
     
     function handleChange(event) { 
         const {value, name} = event.target
+        console.log(value, name)
         setFormProduct(prevProduct => ({
             ...prevProduct, [name]: value})
         )}
+
+    
 
     return (
       <div className=''>
@@ -95,7 +98,7 @@ function Product() {
                 <textarea onChange={handleChange} name="description" placeholder="This is a description..." value={formProduct.description} />
                 <input onChange={handleChange} text={formProduct.category} name="category" placeholder="category" value={formProduct.category} />
                 <input onChange={handleChange} text={formProduct.price} name="price" placeholder="Price" value={formProduct.price} />
-                <input type='file' name='image' placeholder="Image" value={formProduct.image}></input>
+                <input type='file' name='image' placeholder="Image" value={formProduct.image} onChange={handleChange}></input>
                 <button onClick={createProduct}>Create Product</button>
             </form>
                 { products && products.map(product => <ListProduct
