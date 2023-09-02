@@ -26,6 +26,8 @@ class ProductSerializer(serializers.ModelSerializer):
         instance.save()
         return instance"""
 
+    print("created")
+
     class Meta:
         model = Product
         fields = "__all__"

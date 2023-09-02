@@ -32,7 +32,7 @@ function Product() {
             }
         })}
 
-    function createProduct(event) {
+    /*function createProduct(event) {
         axios({
         method: "POST",
         url:"/products/",
@@ -47,18 +47,44 @@ function Product() {
         })
         .then((response) => {
         getProducts()
+        })*/
+
+    function createProduct(event) {
+        event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+        const formData = new FormData(); // Crea un objeto FormData para enviar el formulario
+        console.log(formProduct.image);
+        console.log(formProduct.image.url);
+        formData.append("name", formProduct.name);
+        formData.append("description", formProduct.description);
+        formData.append("image", formProduct.image); // Agrega la imagen al FormData
+
+        formData.append("stock", formProduct.stock);
+        formData.append("category", formProduct.category);
+        formData.append("price", formProduct.price);
+
+        axios({
+            method: "POST",
+            url: "/products/",
+            data: formData, // Usa el FormData en lugar de un objeto JSON
+            headers: { "Content-Type": "multipart/form-data" }, // Asegura que se establezca el encabezado adecuado
         })
+        .then((response) => {
+            getProducts();
+        })
+        .catch((error) => {
+            console.error("Error al crear el producto:", error);
+        });
 
     
-    setFormProduct(({
-          name: "",
-          descrition: "",
-          image: "",
-          stock: false,
-          category: "",
-          price: 0}))
+        setFormProduct({
+            name: "",
+            description: "",
+            image: "",
+            stock: false,
+            category: "",
+            price: 0})
 
-        event.preventDefault()
+            event.preventDefault()
         }
     
     function DeleteProduct(id) {
@@ -81,19 +107,33 @@ function Product() {
         });
     }
     
-    function handleChange(event) { 
-        const {value, name} = event.target
-        console.log(value, name)
+    function handleChange(event) {
+    const { name, value, type } = event.target;
+
+    if (type === 'file') {
+        // Si el elemento es de tipo 'file', accedemos a los archivos seleccionados
+        const selectedFile = event.target.files[0]; // Tomamos el primer archivo seleccionado
+
         setFormProduct(prevProduct => ({
-            ...prevProduct, [name]: value})
-        )}
+        ...prevProduct,
+        image: selectedFile, // Asignamos el archivo al campo correspondiente en el estado
+        }));
+    } else {
+        // Si no es un elemento de tipo 'file', actualizamos el estado como lo hacemos normalmente
+        setFormProduct(prevProduct => ({
+        ...prevProduct,
+        [name]: value,
+        }));
+    }
+    }
+
 
     
 
     return (
       <div className=''>
 
-            <form className="create-product">
+            <form className="create-product" enctype="multipart/form-data">
                 <input onChange={handleChange} text={formProduct.name} name="name" placeholder="Name" value={formProduct.name} />
                 <textarea onChange={handleChange} name="description" placeholder="This is a description..." value={formProduct.description} />
                 <input onChange={handleChange} text={formProduct.category} name="category" placeholder="category" value={formProduct.category} />
