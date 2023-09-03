@@ -3,7 +3,7 @@ env
 db.sqlite3
 migrations
 __pycache__
-/products
+./media/products
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
