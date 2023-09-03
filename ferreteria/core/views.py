@@ -35,7 +35,6 @@ def front(request):
 
 # Funciona igual pero es mucho mas corto
 class Product_List(generics.ListCreateAPIView):
-    print("Por aqui")
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 

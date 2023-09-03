@@ -77,12 +77,12 @@ function Product() {
 
     
         setFormProduct({
-            name: "",
-            description: "",
-            image: "",
-            stock: false,
-            category: "",
-            price: 0})
+          name: "",
+          description: "",
+          image: null,
+          stock: false,
+          category: "",
+          price: 0,})
 
             event.preventDefault()
         }
@@ -108,23 +108,21 @@ function Product() {
     }
     
     function handleChange(event) {
-    const { name, value, type } = event.target;
-
-    if (type === 'file') {
-        // Si el elemento es de tipo 'file', accedemos a los archivos seleccionados
-        const selectedFile = event.target.files[0]; // Tomamos el primer archivo seleccionado
-
-        setFormProduct(prevProduct => ({
-        ...prevProduct,
-        image: selectedFile, // Asignamos el archivo al campo correspondiente en el estado
-        }));
-    } else {
+    const { name, value} = event.target;
         // Si no es un elemento de tipo 'file', actualizamos el estado como lo hacemos normalmente
         setFormProduct(prevProduct => ({
         ...prevProduct,
         [name]: value,
         }));
     }
+
+      function handleFileChange(event) {
+        const selectedFile = event.target.files[0]; // Obtén el archivo seleccionado
+
+        setFormProduct(prevProduct => ({
+        ...prevProduct,
+        image: selectedFile, // Actualiza el campo 'image' en el estado con el archivo seleccionado
+        }));
     }
 
 
@@ -138,7 +136,23 @@ function Product() {
                 <textarea onChange={handleChange} name="description" placeholder="This is a description..." value={formProduct.description} />
                 <input onChange={handleChange} text={formProduct.category} name="category" placeholder="category" value={formProduct.category} />
                 <input onChange={handleChange} text={formProduct.price} name="price" placeholder="Price" value={formProduct.price} />
-                <input type='file' name='image' placeholder="Image" value={formProduct.image} onChange={handleChange}></input>
+
+                <input
+                    type="text"
+                    value={formProduct.image ? formProduct.image.name : ''}
+                    readOnly
+                />
+                <label htmlFor="fileInput">Seleccionar archivo:</label>
+                <input
+                    type="file"
+                    id="fileInput"
+                    style={{ display: 'none' }}
+                    onChange={handleFileChange}
+                />
+                <button onClick={() => document.getElementById('fileInput').click()}>
+                    Examinar
+                </button>
+                
                 <button onClick={createProduct}>Create Product</button>
             </form>
                 { products && products.map(product => <ListProduct
