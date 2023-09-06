@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function App() {
+function Login() {
   const [loginData, setLoginData] = useState({ username: '', password: '' });
   const [registerData, setRegisterData] = useState({ username: '', password: '' });
   const [token, setToken] = useState(null);
@@ -9,7 +9,7 @@ function App() {
   // Función para manejar el inicio de sesión
   const handleLogin = async () => {
     try {
-      const response = await axios.post('URL_DE_TU_API/login/', loginData);
+      const response = await axios.post('/login/', loginData);
       const token = response.data.token; // Suponiendo que el servidor devuelve un token al autenticar
       setToken(token);
     } catch (error) {
@@ -20,7 +20,7 @@ function App() {
   // Función para manejar el registro
   const handleRegister = async () => {
     try {
-      const response = await axios.post('URL_DE_TU_API/register/', registerData);
+      const response = await axios.post('/register/', registerData);
       const token = response.data.token; // Suponiendo que el servidor devuelve un token al registrarse
       setToken(token);
     } catch (error) {
@@ -76,4 +76,4 @@ function App() {
   );
 }
 
-export default App;
+export default Login;
