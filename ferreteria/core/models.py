@@ -1,4 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
+from django.utils import timezone
 
 
 class Product(models.Model):
@@ -25,15 +31,6 @@ class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField()
-
-
-from django.contrib.auth.models import (
-    AbstractBaseUser,
-    BaseUserManager,
-    PermissionsMixin,
-)
-from django.db import models
-from django.utils import timezone
 
 
 class CustomUserManager(BaseUserManager):
@@ -70,6 +67,20 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(default=timezone.now)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+
+    # Especifica nombres de campos reversos personalizados
+    user_permissions = models.ManyToManyField(
+        "auth.Permission",
+        blank=True,
+        related_name="customuser_set",
+        related_query_name="user",
+    )
+    groups = models.ManyToManyField(
+        "auth.Group",
+        blank=True,
+        related_name="customuser_set",
+        related_query_name="user",
+    )
 
     objects = CustomUserManager()
 
