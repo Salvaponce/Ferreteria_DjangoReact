@@ -36,6 +36,7 @@ class Product_Detalle(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProductSerializer
 
 
+"""
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -43,7 +44,7 @@ class UserList(generics.ListAPIView):
 
 class UserDetalle(generics.RetrieveAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserSerializer"""
 
 
 class Cart(generics.CreateAPIView):
@@ -66,9 +67,6 @@ def api_root(request, format=None):
             "products": reverse("products-list", request=request, format=format),
         }
     )
-
-
-# En tu archivo views.py dentro de la aplicación de autenticación
 
 
 @api_view(["POST"])

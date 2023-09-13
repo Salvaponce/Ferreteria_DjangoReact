@@ -29,4 +29,4 @@ class CartSerializer(serializers.ModelSerializer):
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = "__all__"
+        fields = ("id", "username", "email", "date_joined", "is_active", "is_staff")
