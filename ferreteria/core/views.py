@@ -1,3 +1,4 @@
+from rest_framework import jwt_payload_handler, jwt_encode_handler
 from django.shortcuts import render
 from core.models import Product, Cart, CustomUser
 from django.contrib.auth.models import User
@@ -97,34 +98,37 @@ def user_register(request):
         return Response({"token": token.key}, status=status.HTTP_201_CREATED)
 
 
-@api_view(["POST"])
-def user_login(request):
-    """
-    Vista para iniciar sesión de un usuario y obtener un token de acceso.
-    """
-    if request.method == "POST":
+class LoginView(APIView):
+    def post(self, request):
         username = request.data.get("username")
         password = request.data.get("password")
+        user = authenticate(username=username, password=password)
+        if user:
+            token = jwt_payload_handler(user)
+            token = jwt_encode_handler(token)
 
-        if not username or not password:
-            return Response(
-                {
-                    "error": "Se requieren tanto un nombre de usuario como una contraseña."
-                },
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+            # Iniciar sesión al usuario
 
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
             login(request, user)
-            token, _ = Token.objects.get_or_create(user=user)
-            return Response({"token": token.key}, status=status.HTTP_200_OK)
-        else:
-            return Response(
-                {"error": "Credenciales inválidas."},
-                status=status.HTTP_401_UNAUTHORIZED,
-            )
+
+            return Response({"token": token}, status=status.HTTP_200_OK)
+
+        return Response(
+            {"error": "Credenciales incorrectas"}, status=status.HTTP_401_UNAUTHORIZED
+        )
+
+
+class RagistationView(APIView):
+    def post(self, request):
+        result = {}
+        username = request.data.get("username")
+        password = request.data.get("password")
+        email = request.data.get("email")
+        user = User.objects.create_user(
+            username=username, email=email, password=password
+        )
+        user.save()
+        return Response(result, status=200)
 
 
 @api_view(["POST"])

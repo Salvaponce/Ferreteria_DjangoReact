@@ -43,25 +43,25 @@ const Register = ({ handleRegister }) => {
       <Row>
         <Col md={12}>
           <Form onSubmit={handleSubmit}>
-            <h2>Registrarse</h2>
+            <h2>Sign up</h2>
             <Input
               type="text"
               name="username"
-              placeholder="Nombre de usuario"
+              placeholder="User name"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
             <Input
               type="password"
               name="password"
-              placeholder="Contraseña"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
             <Input
               type="email"
               name="email"
-              placeholder="Correo electrónico"
+              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)} />
               </Form>
