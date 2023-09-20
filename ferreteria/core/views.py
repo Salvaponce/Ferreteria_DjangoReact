@@ -1,4 +1,4 @@
-from rest_framework import jwt_payload_handler, jwt_encode_handler
+from rest_framework.utils import jwt_payload_handler, jwt_encode_handler
 from django.shortcuts import render
 from core.models import Product, Cart, CustomUser
 from django.contrib.auth.models import User
